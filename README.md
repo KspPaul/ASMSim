@@ -63,6 +63,6 @@ jumps if the accumulator is zero. The jumping works like jmp
 ### CMX AND CMY
 jumps if x or y is the same as the accumulator
 #### Examples
-** jumps if x is the same as the accumulator: ** cmx 1
+**_jumps if x is the same as the accumulator:_** cmx 1
 
-** jumps if y is the same as the accumulator: ** cmy 4
+**_jumps if y is the same as the accumulator:_** cmy 4
