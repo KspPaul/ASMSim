@@ -7,22 +7,22 @@ This program simulates the basics behind assembly
 ### LDA
 lda is used to load a number into the accumulator. You can directly load a number with a # or you can load it from a storage adresse
 ###### Examples
-** Loads directly a number: ** lda #1
-** Loads from a adress: ** lda x
+** _Loads directly a number:_ ** lda #1
+** _Loads from a adress:_ ** lda x
 
 ### STA
 sta is used to store the accumulator in the storage
 ###### Examples
-** Stores the accumulator int the storage space x: ** sta x
+** _Stores the accumulator int the storage space x:_ ** sta x
 
 ### ADD
 add is used to add a number to the accumulator. You can directly add number or add one from the storage
 ##### Examples
-** adds directly a number: ** add #4
-** adds from a adress: ** add y
+** _adds directly a number:_ ** add #4
+** _adds from a adress:_ ** add y
 
 ### SUB
 sub is used to subtract a number. The Syntax is basicaly the same as the from add
 ##### Examples
-** subdratcs directly a number: ** sub #1
-** subdratcs from a adress: ** sub x
+** _subdratcs directly a number:_ ** sub #1
+** _subdratcs from a adress:_** sub x
