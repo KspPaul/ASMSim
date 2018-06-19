@@ -170,7 +170,7 @@
             // AutoRUnFaToolStripMenuItem
             // 
             this.AutoRUnFaToolStripMenuItem.Name = "AutoRUnFaToolStripMenuItem";
-            this.AutoRUnFaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AutoRUnFaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.AutoRUnFaToolStripMenuItem.Text = "Debug Mode";
             this.AutoRUnFaToolStripMenuItem.Click += new System.EventHandler(this.AutoRun);
             // 

@@ -18,3 +18,14 @@ C:\PR\ASMSim\ASMSim\obj\Debug\ASMSim.csproj.GenerateResource.Cache
 C:\PR\ASMSim\ASMSim\obj\Debug\ASMSim.csproj.CoreCompileInputs.cache
 C:\PR\ASMSim\ASMSim\obj\Debug\ASMSim.exe
 C:\PR\ASMSim\ASMSim\obj\Debug\ASMSim.pdb
+C:\PR\AssemblySim\ASMSim\ASMSim\bin\Debug\ASMSim.exe.config
+C:\PR\AssemblySim\ASMSim\ASMSim\bin\Debug\ASMSim.exe
+C:\PR\AssemblySim\ASMSim\ASMSim\bin\Debug\ASMSim.pdb
+C:\PR\AssemblySim\ASMSim\ASMSim\obj\Debug\ASMSim.csprojResolveAssemblyReference.cache
+C:\PR\AssemblySim\ASMSim\ASMSim\obj\Debug\ASMSim.Form1.resources
+C:\PR\AssemblySim\ASMSim\ASMSim\obj\Debug\ASMSim.Info.resources
+C:\PR\AssemblySim\ASMSim\ASMSim\obj\Debug\ASMSim.Properties.Resources.resources
+C:\PR\AssemblySim\ASMSim\ASMSim\obj\Debug\ASMSim.csproj.GenerateResource.Cache
+C:\PR\AssemblySim\ASMSim\ASMSim\obj\Debug\ASMSim.csproj.CoreCompileInputs.cache
+C:\PR\AssemblySim\ASMSim\ASMSim\obj\Debug\ASMSim.exe
+C:\PR\AssemblySim\ASMSim\ASMSim\obj\Debug\ASMSim.pdb

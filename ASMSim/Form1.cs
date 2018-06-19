@@ -370,7 +370,8 @@ namespace ASMSim
         }
         private void ShowInfo(object sender, EventArgs e)
         {
-            MessageBox.Show("Creator: Paul Engelhardt\nInfo: NOT WORKING YET");
+            Info i = new Info();
+            i.Show();
         }
 
 
