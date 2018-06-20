@@ -21,7 +21,9 @@ lda is used to load a number into the accumulator. You can directly load a numbe
 ### STA
 sta is used to store the accumulator in the storage
 ##### Examples
-** _Stores the accumulator int the storage space x:_ ** sta x
+**
+
+_Stores the accumulator int the storage space x:_** sta x
 
 ### ADD
 add is used to add a number to the accumulator. You can directly add number or add one from the storage
@@ -67,3 +69,8 @@ jumps if x or y is the same as the accumulator
 **_jumps if x is the same as the accumulator:_** cmx 1
 
 **_jumps if y is the same as the accumulator:_** cmy 4
+
+### HLT
+stops the program
+#### Examples
+**_stops the program: _** hlt
