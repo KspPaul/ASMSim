@@ -52,6 +52,7 @@ namespace ASMSim
             "z",
             "s",
         };
+        int[] secondaryStorage = new int[30];
 
         void InitTextbox()
         {
@@ -277,6 +278,11 @@ namespace ASMSim
         /// <returns></returns>
         bool STA(string commend)
         {
+            if (commend[0] == '$')
+            {
+                string[] secStorageName = commend.Split('$');
+                secondaryStorage[Convert.ToInt32(secStorageName[1])] = data.GetAcc();
+            }
             for (int i = 0; i < storageName.Length; i++)
             {
                 if(commend == storageName[i])
@@ -296,6 +302,11 @@ namespace ASMSim
         bool LDA(string command)
         {
 
+            if(command[0] == '$')
+            {
+                string[] secStorageName = command.Split('$');
+                data.SetAcc(Convert.ToInt32(secondaryStorage[Convert.ToInt32(secStorageName[1])]));
+            }
             if (command[0] == '#')
             {
                 string[] intToConvert = command.Split('#');
@@ -326,6 +337,7 @@ namespace ASMSim
             {
                 storage[i] = 0; 
             }
+            InitSecStorage();
             data.SetCurrentP(0);
             data.SetAcc(0);
             PrintData();
@@ -471,11 +483,18 @@ namespace ASMSim
         }
 
 
-
+        void InitSecStorage()
+        {
+            for (int i = 0; i < secondaryStorage.Length; i++)
+            {
+                secondaryStorage[i] = 0;
+            }
+        }
         public Form1()
         {
             InitializeComponent();
             InitTextbox();
+            InitSecStorage();
         }
     }
 }
