@@ -75,6 +75,7 @@ namespace ASMSim
         /// <param name="e"></param>
         private void Compiler_Click(object sender, EventArgs e)
         {
+
             stop = !stop;
             if (stop)
             {
