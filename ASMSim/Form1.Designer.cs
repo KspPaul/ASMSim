@@ -45,9 +45,15 @@
             this.saveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AutoRUnFaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.programSpeedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ProgramSpeedBox = new System.Windows.Forms.ToolStripTextBox();
+            this.saveSpeedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.programInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SecondaryStorageToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
             this.ZDisplay = new System.Windows.Forms.TextBox();
             this.SDisplay = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.LastChangedSec = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,7 +101,7 @@
             // 
             // Reset
             // 
-            this.Reset.Location = new System.Drawing.Point(483, 225);
+            this.Reset.Location = new System.Drawing.Point(483, 196);
             this.Reset.Name = "Reset";
             this.Reset.Size = new System.Drawing.Size(130, 70);
             this.Reset.TabIndex = 5;
@@ -121,7 +127,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.testToolStripMenuItem,
-            this.optionToolStripMenuItem});
+            this.optionToolStripMenuItem,
+            this.programInfoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(731, 24);
@@ -141,28 +148,29 @@
             // testToolStripMenuItem1
             // 
             this.testToolStripMenuItem1.Name = "testToolStripMenuItem1";
-            this.testToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.testToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.testToolStripMenuItem1.Text = "Info";
             this.testToolStripMenuItem1.Click += new System.EventHandler(this.ShowInfo);
             // 
             // readFormToolStripMenuItem
             // 
             this.readFormToolStripMenuItem.Name = "readFormToolStripMenuItem";
-            this.readFormToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.readFormToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.readFormToolStripMenuItem.Text = "Open File";
             this.readFormToolStripMenuItem.Click += new System.EventHandler(this.readFormToolStripMenuItem_Click);
             // 
             // saveFileToolStripMenuItem
             // 
             this.saveFileToolStripMenuItem.Name = "saveFileToolStripMenuItem";
-            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.saveFileToolStripMenuItem.Text = "Save File";
             this.saveFileToolStripMenuItem.Click += new System.EventHandler(this.SaveFileToolStripMenuItem_Click);
             // 
             // optionToolStripMenuItem
             // 
             this.optionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AutoRUnFaToolStripMenuItem});
+            this.AutoRUnFaToolStripMenuItem,
+            this.programSpeedToolStripMenuItem});
             this.optionToolStripMenuItem.Name = "optionToolStripMenuItem";
             this.optionToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.optionToolStripMenuItem.Text = "Option";
@@ -170,9 +178,45 @@
             // AutoRUnFaToolStripMenuItem
             // 
             this.AutoRUnFaToolStripMenuItem.Name = "AutoRUnFaToolStripMenuItem";
-            this.AutoRUnFaToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.AutoRUnFaToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.AutoRUnFaToolStripMenuItem.Text = "Debug Mode";
             this.AutoRUnFaToolStripMenuItem.Click += new System.EventHandler(this.AutoRun);
+            // 
+            // programSpeedToolStripMenuItem
+            // 
+            this.programSpeedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProgramSpeedBox,
+            this.saveSpeedToolStripMenuItem});
+            this.programSpeedToolStripMenuItem.Name = "programSpeedToolStripMenuItem";
+            this.programSpeedToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.programSpeedToolStripMenuItem.Text = "Program Speed: ";
+            // 
+            // ProgramSpeedBox
+            // 
+            this.ProgramSpeedBox.Name = "ProgramSpeedBox";
+            this.ProgramSpeedBox.Size = new System.Drawing.Size(100, 23);
+            this.ProgramSpeedBox.Text = "400";
+            // 
+            // saveSpeedToolStripMenuItem
+            // 
+            this.saveSpeedToolStripMenuItem.Name = "saveSpeedToolStripMenuItem";
+            this.saveSpeedToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.saveSpeedToolStripMenuItem.Text = "Save Speed";
+            this.saveSpeedToolStripMenuItem.Click += new System.EventHandler(this.saveSpeedToolStripMenuItem_Click);
+            // 
+            // programInfoToolStripMenuItem
+            // 
+            this.programInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SecondaryStorageToolStripMenuItem});
+            this.programInfoToolStripMenuItem.Name = "programInfoToolStripMenuItem";
+            this.programInfoToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
+            this.programInfoToolStripMenuItem.Text = "Program Info";
+            // 
+            // SecondaryStorageToolStripMenuItem
+            // 
+            this.SecondaryStorageToolStripMenuItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SecondaryStorageToolStripMenuItem.Name = "SecondaryStorageToolStripMenuItem";
+            this.SecondaryStorageToolStripMenuItem.Size = new System.Drawing.Size(172, 23);
             // 
             // ZDisplay
             // 
@@ -200,12 +244,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // LastChangedSec
+            // 
+            this.LastChangedSec.Location = new System.Drawing.Point(483, 275);
+            this.LastChangedSec.Name = "LastChangedSec";
+            this.LastChangedSec.ReadOnly = true;
+            this.LastChangedSec.Size = new System.Drawing.Size(130, 20);
+            this.LastChangedSec.TabIndex = 12;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(731, 466);
+            this.Controls.Add(this.LastChangedSec);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.SDisplay);
             this.Controls.Add(this.ZDisplay);
@@ -217,13 +269,13 @@
             this.Controls.Add(this.Compiler);
             this.Controls.Add(this.Code);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "AsmSim";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -251,6 +303,12 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem optionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AutoRUnFaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem programSpeedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox ProgramSpeedBox;
+        private System.Windows.Forms.ToolStripMenuItem saveSpeedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem programInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox SecondaryStorageToolStripMenuItem;
+        private System.Windows.Forms.TextBox LastChangedSec;
     }
 }
 

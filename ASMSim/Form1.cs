@@ -282,6 +282,7 @@ namespace ASMSim
             {
                 string[] secStorageName = commend.Split('$');
                 secondaryStorage[Convert.ToInt32(secStorageName[1])] = data.GetAcc();
+                LastChangedSec.Text = "last changed: "+secStorageName[1] + ": " + data.GetAcc(); 
             }
             for (int i = 0; i < storageName.Length; i++)
             {
@@ -379,6 +380,36 @@ namespace ASMSim
                 {
                     Compiler.Text = "Run";
                 }
+
+                PrintSecStorage();
+                PrintRunningProgram();
+            }
+        }
+
+        void PrintRunningProgram()
+        {
+            for (int i = 0; i < list.Length; i++)
+            {
+                if(i >= lines.Length)
+                {
+                    list[i].Text = "       "+i+": NOP";
+                }
+                else if(i == data.GetCurrentP())
+                {
+                    list[i].Text = ">     "+i + ": "+lines[i];
+                }
+                else
+                {
+                    list[i].Text = "       "+i+": "+lines[i];
+                }
+            }
+        }
+
+        void PrintSecStorage()
+        {
+            for (int i = 0; i < secondaryStorage.Length; i++)
+            {
+                SecondaryStorageToolStripMenuItem.Items[i] = i+": "+secondaryStorage[i];
             }
         }
         private void ShowInfo(object sender, EventArgs e)
@@ -447,7 +478,6 @@ namespace ASMSim
             }
         }
 
-
         /// <summary>
         /// prints the most important variables to the Form
         /// </summary>
@@ -485,16 +515,29 @@ namespace ASMSim
 
         void InitSecStorage()
         {
+            SecondaryStorageToolStripMenuItem.Text = "Sec";
             for (int i = 0; i < secondaryStorage.Length; i++)
             {
                 secondaryStorage[i] = 0;
+                SecondaryStorageToolStripMenuItem.Items.Add(secondaryStorage[i]);
             }
+
         }
         public Form1()
         {
             InitializeComponent();
             InitTextbox();
             InitSecStorage();
+        }
+
+        private void saveSpeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RunProgramTick.Interval = Convert.ToInt32(ProgramSpeedBox.Text);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
