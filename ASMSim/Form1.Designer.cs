@@ -131,7 +131,8 @@
             this.programInfoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(731, 24);
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menuStrip1.Size = new System.Drawing.Size(732, 24);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -209,8 +210,8 @@
             this.programInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SecondaryStorageToolStripMenuItem});
             this.programInfoToolStripMenuItem.Name = "programInfoToolStripMenuItem";
-            this.programInfoToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
-            this.programInfoToolStripMenuItem.Text = "Program Info";
+            this.programInfoToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.programInfoToolStripMenuItem.Text = "Secondary Storage";
             // 
             // SecondaryStorageToolStripMenuItem
             // 
@@ -255,7 +256,7 @@
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.AutoSize = true;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(731, 466);
             this.Controls.Add(this.LastChangedSec);
             this.Controls.Add(this.button1);
@@ -270,12 +271,12 @@
             this.Controls.Add(this.Code);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "AsmSim";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

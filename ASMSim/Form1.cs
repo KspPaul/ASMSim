@@ -61,7 +61,8 @@ namespace ASMSim
             {
                 TextBox text = new TextBox();
                 text.Location = new Point(10, pos);
-                text.Text = Convert.ToString(i) + ":"+"TODO";
+                text.Text = Convert.ToString(i) + ":" + "TODO";
+                text.ReadOnly = true;
                 this.Controls.Add(text);
                 pos += 20;
                 list[i] = text;
@@ -87,7 +88,7 @@ namespace ASMSim
                 Compiler.Text = "Stop";
             }
 
-            currentPosition = data.GetCurrentP()-1;
+            currentPosition = data.GetCurrentP() - 1;
             lines = Code.Text.Split('\n');
         }
         /// <summary>
@@ -175,7 +176,7 @@ namespace ASMSim
             if (command[0] == '#')
             {
                 string[] intToConvert = command.Split('#');
-                data.SetAcc(data.GetAcc()/ Convert.ToInt32(intToConvert[1]));
+                data.SetAcc(data.GetAcc() / Convert.ToInt32(intToConvert[1]));
             }
             else
             {
@@ -263,7 +264,7 @@ namespace ASMSim
                 {
                     if (command[0] == Convert.ToChar(storageName[i]))
                     {
-                        data.SetAcc(data.GetAcc()+storage[i]);
+                        data.SetAcc(data.GetAcc() + storage[i]);
                     }
                 }
             }
@@ -282,11 +283,11 @@ namespace ASMSim
             {
                 string[] secStorageName = commend.Split('$');
                 secondaryStorage[Convert.ToInt32(secStorageName[1])] = data.GetAcc();
-                LastChangedSec.Text = "last changed: "+secStorageName[1] + ": " + data.GetAcc(); 
+                LastChangedSec.Text = "last changed: " + secStorageName[1] + ": " + data.GetAcc();
             }
             for (int i = 0; i < storageName.Length; i++)
             {
-                if(commend == storageName[i])
+                if (commend == storageName[i])
                 {
                     storage[i] = data.GetAcc();
                 }
@@ -303,7 +304,7 @@ namespace ASMSim
         bool LDA(string command)
         {
 
-            if(command[0] == '$')
+            if (command[0] == '$')
             {
                 string[] secStorageName = command.Split('$');
                 data.SetAcc(Convert.ToInt32(secondaryStorage[Convert.ToInt32(secStorageName[1])]));
@@ -317,7 +318,7 @@ namespace ASMSim
             {
                 for (int i = 0; i < storage.Length; i++)
                 {
-                    if(command == storageName[i])
+                    if (command == storageName[i])
                     {
                         data.SetAcc(storage[i]);
                     }
@@ -336,7 +337,7 @@ namespace ASMSim
         {
             for (int i = 0; i < storage.Length; i++)
             {
-                storage[i] = 0; 
+                storage[i] = 0;
             }
             InitSecStorage();
             data.SetCurrentP(0);
@@ -390,17 +391,17 @@ namespace ASMSim
         {
             for (int i = 0; i < list.Length; i++)
             {
-                if(i >= lines.Length)
+                if (i >= lines.Length)
                 {
-                    list[i].Text = "       "+i+": NOP";
+                    list[i].Text = "       " + i + ": NOP";
                 }
-                else if(i == data.GetCurrentP())
+                else if (i == data.GetCurrentP())
                 {
-                    list[i].Text = ">     "+i + ": "+lines[i];
+                    list[i].Text = ">     " + i + ": " + lines[i];
                 }
                 else
                 {
-                    list[i].Text = "       "+i+": "+lines[i];
+                    list[i].Text = "       " + i + ": " + lines[i];
                 }
             }
         }
@@ -409,7 +410,7 @@ namespace ASMSim
         {
             for (int i = 0; i < secondaryStorage.Length; i++)
             {
-                SecondaryStorageToolStripMenuItem.Items[i] = i+": "+secondaryStorage[i];
+                SecondaryStorageToolStripMenuItem.Items[i] = i + ": " + secondaryStorage[i];
             }
         }
         private void ShowInfo(object sender, EventArgs e)
@@ -500,7 +501,7 @@ namespace ASMSim
         {
             runAuto = !runAuto;
 
-            if(runAuto)
+            if (runAuto)
             {
                 button1.IsAccessible = false;
                 AutoRUnFaToolStripMenuItem.Text = "Debug Mode";
@@ -535,9 +536,35 @@ namespace ASMSim
             RunProgramTick.Interval = Convert.ToInt32(ProgramSpeedBox.Text);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
+
+        /// <summary>
+        /// All the following code is copied from Stack Overflow
+        /// Source: https://stackoverflow.com/questions/22780571/scale-windows-forms-window
+        /// </summary>
+        private Size oldSize;
+        private void Form1_Load(System.Object sender, System.EventArgs e)
+        {
+            oldSize = base.Size;
+        }
+        protected override void OnResize(System.EventArgs e)
+        {
+            base.OnResize(e);
+            foreach (Control cnt in this.Controls)
+            {
+                ResizeAll(cnt, base.Size);
+            }
+            oldSize = base.Size;
+        }
+        private void ResizeAll(Control cnt, Size newSize)
+        {
+            int iWidth = newSize.Width - oldSize.Width;
+            cnt.Left += (cnt.Left * iWidth) / oldSize.Width;
+            cnt.Width += (cnt.Width * iWidth) / oldSize.Width;
+
+            int iHeight = newSize.Height - oldSize.Height;
+            cnt.Top += (cnt.Top * iHeight) / oldSize.Height;
+            cnt.Height += (cnt.Height * iHeight) / oldSize.Height;
         }
     }
 }
