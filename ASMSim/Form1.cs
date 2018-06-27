@@ -19,6 +19,7 @@ namespace ASMSim
         TextBox[] list = new TextBox[22];
         CodeData data = new CodeData();
         string[] lines;
+        bool ProgramStarted = false;
         bool runAuto = true;
         bool stop = true;
         int currentPosition;
@@ -36,6 +37,8 @@ namespace ASMSim
             "cmy",          //8
             "mul",          //9
             "div",          //10
+            "shi",          //11
+            "shr",          //12
         };
 
         public int[] storage =
@@ -61,7 +64,7 @@ namespace ASMSim
             {
                 TextBox text = new TextBox();
                 text.Location = new Point(10, pos);
-                text.Text = Convert.ToString(i) + ":" + "TODO";
+                text.Text = Convert.ToString(i) + ":" + "NOP";
                 text.ReadOnly = true;
                 this.Controls.Add(text);
                 pos += 20;
@@ -77,7 +80,12 @@ namespace ASMSim
         /// <param name="e"></param>
         private void Compiler_Click(object sender, EventArgs e)
         {
+            StartProgram();
+        }
+        void StartProgram()
+        {
 
+            if (!ProgramStarted) ProgramStarted = true;
             stop = !stop;
             if (stop)
             {
@@ -158,6 +166,14 @@ namespace ASMSim
             {
                 kill = true;
             }
+            else if(currentCommand[0] == commands[11])
+            {
+                SHI(currentCommand[1]);
+            }
+            else if(currentCommand[0] == commands[12])
+            {
+                SHR(currentCommand[1]);
+            }
             else
             {
                 kill = true;
@@ -166,7 +182,18 @@ namespace ASMSim
             return kill;
         }
 
-
+        void SHR(string command)
+        {
+            string[] x = command.Split('#');
+            int s = data.GetAcc() >> Convert.ToInt32(x[1]);
+            data.SetAcc(s);
+        }
+        void SHI(string command)
+        {
+            string[] x = command.Split('#');
+            int s = data.GetAcc() << Convert.ToInt32(x[1]);
+            data.SetAcc(s);
+        }
         /// <summary>
         /// used for dividing
         /// </summary>
@@ -389,19 +416,43 @@ namespace ASMSim
 
         void PrintRunningProgram()
         {
-            for (int i = 0; i < list.Length; i++)
+            if (data.GetCurrentP() < 22)
             {
-                if (i >= lines.Length)
+                for (int i = 0; i < list.Length; i++)
                 {
-                    list[i].Text = "       " + i + ": NOP";
+                    if (i >= lines.Length)
+                    {
+                        list[i].Text = "       " + i + ": NOP";
+                    }
+                    else if (i == data.GetCurrentP())
+                    {
+                        list[i].Text = ">     " + i + ": " + lines[i];
+                    }
+                    else
+                    {
+                        list[i].Text = "       " + i + ": " + lines[i];
+                    }
                 }
-                else if (i == data.GetCurrentP())
+            }
+            else
+            {
+                if(data.GetCurrentP() >= 22)
                 {
-                    list[i].Text = ">     " + i + ": " + lines[i];
-                }
-                else
-                {
-                    list[i].Text = "       " + i + ": " + lines[i];
+                    for (int i = data.GetCurrentP(), x = 0; x < list.Length; i++, x++)
+                    {
+                        if (i >= lines.Length)
+                        {
+                            list[x].Text = "       " + i + ": NOP";
+                        }
+                        else if (i == data.GetCurrentP())
+                        {
+                            list[x].Text = ">     " + i + ": " + lines[i];
+                        }
+                        else
+                        {
+                            list[x].Text = "       " + i + ": " + lines[i];
+                        }
+                    }
                 }
             }
         }
@@ -410,7 +461,7 @@ namespace ASMSim
         {
             for (int i = 0; i < secondaryStorage.Length; i++)
             {
-                SecondaryStorageToolStripMenuItem.Items[i] = i + ": " + secondaryStorage[i];
+                listBox1.Items[i] = "$" + i + ": " + secondaryStorage[i];
             }
         }
         private void ShowInfo(object sender, EventArgs e)
@@ -462,7 +513,15 @@ namespace ASMSim
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            ProgramCounter();
+            if (ProgramStarted)
+            {
+                ProgramCounter();
+            }
+            else
+            {
+                ProgramStarted = true;
+                ProgramCounter();
+            }
         }
 
 
@@ -514,13 +573,47 @@ namespace ASMSim
         }
 
 
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.F5))
+            {
+                runAuto = true;
+                button1.IsAccessible = false;
+
+                if (!ProgramStarted)
+                {
+                    StartProgram();
+                }
+                return true;
+            }
+            if(keyData == (Keys.F7))
+            {
+                if (!button1.IsAccessible)
+                {
+                    button1.IsAccessible = true;
+                }
+                if (!ProgramStarted)
+                {
+                    StartProgram();
+                }
+                if (runAuto)
+                {
+                    button1.IsAccessible = true;
+                    runAuto = false;
+                    AutoRUnFaToolStripMenuItem.Text = "Automatic Mode";
+                }
+                ProgramCounter();
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         void InitSecStorage()
         {
-            SecondaryStorageToolStripMenuItem.Text = "Sec";
             for (int i = 0; i < secondaryStorage.Length; i++)
             {
                 secondaryStorage[i] = 0;
-                SecondaryStorageToolStripMenuItem.Items.Add(secondaryStorage[i]);
             }
 
         }
@@ -529,8 +622,17 @@ namespace ASMSim
             InitializeComponent();
             InitTextbox();
             InitSecStorage();
+            InitList();
         }
 
+        void InitList()
+        {
+            for (int i = 0; i < secondaryStorage.Length; i++)
+            {
+                listBox1.Items.Add("$" + i + ": " + secondaryStorage[i]);
+            }
+            PrintSecStorage();
+        }
         private void saveSpeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RunProgramTick.Interval = Convert.ToInt32(ProgramSpeedBox.Text);
