@@ -573,7 +573,12 @@ namespace ASMSim
         }
 
 
-
+        /// <summary>
+        /// that are the hotkeys
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.F5))
